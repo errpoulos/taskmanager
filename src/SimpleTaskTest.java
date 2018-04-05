@@ -66,4 +66,14 @@ class SimpleTaskTest {
         int numOfTasks = 1;
         assertEquals(numOfTasks, st.numberOfSubTasks);
     }
+
+    @Test
+    void startTimeGreaterThanEndTimeTest() throws RuntimeException {
+
+        SimpleTask st = new SimpleTask(1, 2, "taskInstance");
+        st.setEndTime(0);
+        if (st.getEndTime() < st.getStartTime()) {
+            throw new RuntimeException("Start time must be less than end time");
+        }
+    }
 }

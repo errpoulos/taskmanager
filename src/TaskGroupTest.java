@@ -3,9 +3,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class TaskGroupTest {
 
@@ -44,5 +42,20 @@ class TaskGroupTest {
         TaskGroup taskGroup = new TaskGroup(List, 0);
         taskGroup.removeSubTask(st1);
         assertFalse(List.contains(st1));
+    }
+
+    @Test
+    void startTimeGreaterThanEndTimeTest() throws RuntimeException {
+        List<SimpleTask> List = new ArrayList<>();
+        TaskGroup taskGroup = new TaskGroup(List, 0);
+        SimpleTask st = new SimpleTask(1, 2, "taskInstance");
+        taskGroup.addSubTask(st);
+        for (SimpleTask s : List) {
+            if (s.getEndTime() < s.getStartTime()) {
+                throw new RuntimeException("Start time must be less than end time");
+
+            }
+
+        }
     }
 }
